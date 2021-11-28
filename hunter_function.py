@@ -3,16 +3,26 @@ import sys
 from boll import Boll
 
 
-def update_screen(h_settings, screen, bolls, area):
+def update_screen(h_settings, screen, play_button, quit_button, bolls, area):
     """Обновляет изображения на экране и отображает новый экран."""
     screen.fill(h_settings.bg_color)
+
+    # Выводит на экран мяч
     for boll in bolls.sprites():
         boll.blitme()
+
+    # Выводит на экран площадку.
     area.blitme()
+
     checking_the_exit_from_the_screen(h_settings, screen, bolls)
     if check_collisions(h_settings, screen, bolls, area):
         del_bolls(bolls)
         new_bolls(h_settings, screen, bolls)
+
+    # Вывод кнопок на экран
+    play_button.draw_button()
+    # quit_button.draw_button()
+
     pygame.display.flip()
 
 def check_collisions(h_settings, screen, bolls, area):
@@ -73,7 +83,7 @@ def bolls_update(h_settings, screen, bolls, area):
     bolls.update()
 
 def checking_the_exit_from_the_screen(h_settings, screen, bolls):
-    """Удаляет мяч и выводит."""
+    """Удаляет мяч и выводит картинку о конце игры."""
     for boll in bolls.copy():
         if boll.rect.y >= h_settings.screen_height:
 

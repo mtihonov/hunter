@@ -12,17 +12,23 @@ def run_game():
     screen = pygame.display.set_mode((h_settings.screen_width, h_settings.screen_height))
     pygame.display.set_caption("Hunter")
 
+    # Создание мяча
     bolls = Group()
     hf.new_bolls(h_settings, screen, bolls)
+
+    # Создание площадки
     area = Area(h_settings, screen)
+
+    # Создание кнопок для начала и конца игры
     play_button = Button(h_settings, screen, "Play")
-    quit_button
+    quit_button = Button(h_settings, screen, "Quit")
 
 
     while True:
         hf.check_events(h_settings, screen, area)
-        hf.update_screen(h_settings, screen, bolls, area)
+        hf.update_screen(h_settings, screen, play_button, quit_button, bolls, area)
         area.update()
         hf.bolls_update(h_settings, screen, bolls, area)
+
 
 run_game()
