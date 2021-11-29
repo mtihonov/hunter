@@ -27,13 +27,11 @@ def run_game():
     # Создание экземпляра для хранения игровой статистики
     stats = GameStats(h_settings)
 
-
     while True:
-        hf.check_events(h_settings, screen, area)
-        while stats.game_active:
-            hf.update_screen(h_settings, screen, play_button, quit_button, bolls, area)
+        hf.check_events(h_settings, screen, stats, area, play_button, quit_button)
+        hf.update_screen(h_settings, screen, play_button, quit_button, bolls, area, stats)
+        if stats.game_active:
             area.update()
-            hf.bolls_update(h_settings, screen, bolls, area)
-
+            hf.bolls_update(screen, bolls)
 
 run_game()

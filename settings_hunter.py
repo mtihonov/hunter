@@ -8,7 +8,7 @@ class Settings():
         self.bg_color = (255, 255, 255)
 
         # Скорость перемещения мяча.
-        self.speed_boll = 0.2
+        self.speed_boll = 0.9
 
         # Количество одновременнонаходящихся мячей в игре.
         self.quantity_boll = 1
