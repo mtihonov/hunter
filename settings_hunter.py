@@ -13,9 +13,6 @@ class Settings():
         # Количество одновременнонаходящихся мячей в игре.
         self.quantity_boll = 1
 
-        # Количество попыток.
-        self.boll_limit = 1
-
         # атрибуты площадки
         self.speed_area = 1.0
         self.area_width = 150

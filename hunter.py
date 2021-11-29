@@ -4,6 +4,7 @@ import hunter_function as hf
 from pygame.sprite import Group
 from area import Area
 from button import Button
+from game_stats import GameStats
 
 def run_game():
     """Инициализирует игру и создает объект экрана."""
@@ -23,12 +24,16 @@ def run_game():
     play_button = Button(h_settings, screen, "Play", 350, 500)
     quit_button = Button(h_settings, screen, "Quit", 800, 500)
 
+    # Создание экземпляра для хранения игровой статистики
+    stats = GameStats(h_settings)
+
 
     while True:
         hf.check_events(h_settings, screen, area)
-        hf.update_screen(h_settings, screen, play_button, quit_button, bolls, area)
-        area.update()
-        hf.bolls_update(h_settings, screen, bolls, area)
+        while stats.game_active:
+            hf.update_screen(h_settings, screen, play_button, quit_button, bolls, area)
+            area.update()
+            hf.bolls_update(h_settings, screen, bolls, area)
 
 
 run_game()

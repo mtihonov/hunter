@@ -17,11 +17,10 @@ class Button():
         self.text_color = (0, 255, 0)
         self.font = pygame.font.SysFont('Boncegro FF 4F', 36)
 
-        # Построение объекта rect кнопки и выравнивание по центру экрана.
+        # Построение объекта rect кнопки и выравнивание по заданным координатам.
         self.rect = pygame.Rect(0, 0, self.width, self.height)
         self.rect.x = self.screen_rect.x
         self.rect.y = self.screen_rect.y
-
 
         # Сообщение кнопки создается только дин раз.
         self.prep_msg(msg)
