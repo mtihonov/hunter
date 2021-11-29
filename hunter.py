@@ -20,8 +20,8 @@ def run_game():
     area = Area(h_settings, screen)
 
     # Создание кнопок для начала и конца игры
-    play_button = Button(h_settings, screen, "Play")
-    quit_button = Button(h_settings, screen, "Quit")
+    play_button = Button(h_settings, screen, "Play", 350, 500)
+    quit_button = Button(h_settings, screen, "Quit", 800, 500)
 
 
     while True:

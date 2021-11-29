@@ -14,7 +14,7 @@ class Settings():
         self.quantity_boll = 1
 
         # Количество попыток.
-        self.boll_limit = 3
+        self.boll_limit = 1
 
         # атрибуты площадки
         self.speed_area = 1.0

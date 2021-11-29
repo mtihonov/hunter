@@ -21,7 +21,7 @@ def update_screen(h_settings, screen, play_button, quit_button, bolls, area):
 
     # Вывод кнопок на экран
     play_button.draw_button()
-    # quit_button.draw_button()
+    quit_button.draw_button()
 
     pygame.display.flip()
 
