@@ -5,6 +5,7 @@ from pygame.sprite import Group
 from area import Area
 from button import Button
 from game_stats import GameStats
+from scoreboard import Scoreboard
 
 def run_game():
     """Инициализирует игру и создает объект экрана."""
@@ -27,9 +28,12 @@ def run_game():
     # Создание экземпляра для хранения игровой статистики
     stats = GameStats(h_settings)
 
+    # Созжание экземпляра для хранения игрового счета.
+    sb = Scoreboard(h_settings,screen, stats)
+
     while True:
         hf.check_events(h_settings, screen, stats, area, play_button, quit_button)
-        hf.update_screen(h_settings, screen, play_button, quit_button, bolls, area, stats)
+        hf.update_screen(h_settings, screen, sb, play_button, quit_button, bolls, area, stats)
         if stats.game_active:
             area.update()
             hf.bolls_update(screen, bolls)

@@ -3,7 +3,7 @@ import sys
 from boll import Boll
 
 
-def update_screen(h_settings, screen, play_button, quit_button, bolls, area, stats):
+def update_screen(h_settings, screen, sb, play_button, quit_button, bolls, area, stats):
     """Обновляет изображения на экране и отображает новый экран."""
     screen.fill(h_settings.bg_color)
 
@@ -24,6 +24,8 @@ def update_screen(h_settings, screen, play_button, quit_button, bolls, area, sta
             load_image_game_over(h_settings, screen)
         play_button.draw_button()
         quit_button.draw_button()
+
+    sb.show_score()
 
     pygame.display.flip()
 

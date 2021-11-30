@@ -26,7 +26,8 @@ class Scoreboard():
         """Преобразует текущий счет в графическое изображение."""
         rounded_score = int(round(self.stats.score, -1))
         score_str = "{:,}".format(rounded_score)
-        self.score_image = self.font.render('Поймано мячей - ' + score_str, True, self.text_color, self.h_settings.bg_color)
+        self.score_image = self.font.render('Поймано мячей - ' + score_str, True, self.text_color,
+                                            self.h_settings.bg_color)
 
         # Вывод счета в правой верхней части экрана.
         self.score_rect = self.score_image.get_rect()
