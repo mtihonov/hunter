@@ -18,14 +18,18 @@ def update_screen(h_settings, screen, sb, play_button, quit_button, bolls, area,
 
     check_collisions(h_settings, screen, bolls, area)
 
+    sb.show_score()
+
     # Вывод кнопок на экран
     if not stats.game_active:
         if stats.boll_left <= 0:
             load_image_game_over(h_settings, screen)
+            sb.show_score_game_over()
+        else:
+            sb.show_score()
+
         play_button.draw_button()
         quit_button.draw_button()
-
-    sb.show_score()
 
     pygame.display.flip()
 
@@ -91,7 +95,6 @@ def check_play_button(h_settings, screen, stats, play_button, quit_button, mouse
     if play_button_clicked and not stats.game_active:
         # Сбро игровых настроек.
         # ai_settings.initialize_dynamic_settings()
-
         # Указатель мыши скрывается.
         pygame.mouse.set_visible(False)
 

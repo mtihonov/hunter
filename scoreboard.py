@@ -15,6 +15,7 @@ class Scoreboard():
 
         # Настройки шрифта для вывода счетва.
         self.text_color = (209, 126, 43)
+        self.rect_color = (0, 0, 0)
         self.font = pygame.font.SysFont('Boncegro FF 4F', 25)
 
         # Подготовка исходного изображения.
@@ -22,11 +23,12 @@ class Scoreboard():
         self.prep_high_score()
         self.prep_bolls()
 
+
     def prep_score(self):
         """Преобразует текущий счет в графическое изображение."""
         rounded_score = int(round(self.stats.score, -1))
-        score_str = "{:,}".format(rounded_score)
-        self.score_image = self.font.render('Поймано мячей - ' + score_str, True, self.text_color,
+        self.score_str = "{:,}".format(rounded_score)
+        self.score_image = self.font.render('Поймано мячей - ' + self.score_str, True, self.text_color,
                                             self.h_settings.bg_color)
 
         # Вывод счета в правой верхней части экрана.
@@ -45,8 +47,8 @@ class Scoreboard():
     def prep_high_score(self):
         """Преобразует рекордный счет в графическое изображение."""
         high_score = int(round(self.stats.high_score, -1))
-        high_score_str = "{:,}".format(high_score)
-        self.high_score_image = self.font.render('Рекорд: ' + high_score_str, True, self.text_color,
+        self.high_score_str = "{:,}".format(high_score)
+        self.high_score_image = self.font.render('Рекорд: ' + self.high_score_str, True, self.text_color,
                                                  self.h_settings.bg_color)
 
         # Рекордно выравнивается по центру верхней стороны.
@@ -62,3 +64,20 @@ class Scoreboard():
             boll.rect.x = 10 + boll_number * boll.rect.width
             boll.rect.y = 10
             self.bolls.add(boll)
+
+    def game_over_prep_score(self):
+        """Изменяет фон счета и выводит на экран после завершения количества попыток."""
+        self.game_over_score_image = self.font.render('Поймано мячей - ' + self.score_str, True, self.text_color,
+                                            self.rect_color )
+
+    def game_over_prep_high_score(self):
+        """Изменяет фон рекордного счета и выводит на экран после завершения количества попыток."""
+        self.game_over_high_score_image = self.font.render('Рекорд: ' + self.high_score_str, True, self.text_color,
+                                                 self.rect_color)
+
+    def show_score_game_over(self):
+        """Выводит счет на экран."""
+        self.game_over_prep_score()
+        self.game_over_prep_high_score()
+        self.screen.blit(self.game_over_score_image, self.score_rect)
+        self.screen.blit(self.game_over_high_score_image, self.high_score_rect)
