@@ -14,7 +14,7 @@ def update_screen(h_settings, screen, sb, play_button, quit_button, bolls, area,
     # Выводит на экран площадку.
     area.blitme()
 
-    checking_the_exit_from_the_screen(h_settings, screen, bolls, stats)
+    checking_the_exit_from_the_screen(h_settings, screen, bolls, stats, sb)
 
     check_collisions(h_settings, screen, bolls, area)
 
@@ -76,7 +76,7 @@ def check_keyup_events(event, h_settings, area):
     elif event.key == pygame.K_d:
         area.moving_right = False
 
-def check_events(h_settings, screen, stats, area, play_button, quit_button):
+def check_events(h_settings, screen, stats, sb, area, play_button, quit_button):
     """Обрабатывает нажатия клавиш и события мыши."""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -87,9 +87,9 @@ def check_events(h_settings, screen, stats, area, play_button, quit_button):
             check_keyup_events(event, h_settings, area)
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            check_play_button(h_settings, screen, stats, play_button, quit_button, mouse_x, mouse_y)
+            check_play_button(h_settings, screen, stats, sb, play_button, quit_button, mouse_x, mouse_y)
 
-def check_play_button(h_settings, screen, stats, play_button, quit_button, mouse_x, mouse_y):
+def check_play_button(h_settings, screen, stats, sb, play_button, quit_button, mouse_x, mouse_y):
     """Запускает или закрывает игру при нажатии мышкой на кнопки"""
     play_button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     if play_button_clicked and not stats.game_active:
@@ -100,7 +100,7 @@ def check_play_button(h_settings, screen, stats, play_button, quit_button, mouse
 
         stats.reset_stats()
         stats.game_active = True
-        load_image_game_over(h_settings, screen)
+        sb.prep_bolls()
 
     quit_button_clicked = quit_button.rect.collidepoint(mouse_x, mouse_y)
     if quit_button_clicked:
@@ -110,12 +110,13 @@ def bolls_update(screen, bolls):
     """Обновление позиции мяча."""
     bolls.update()
 
-def checking_the_exit_from_the_screen(h_settings, screen, bolls, stats):
+def checking_the_exit_from_the_screen(h_settings, screen, bolls, stats, sb):
     """Удаляет мяч и выводит картинку о конце игры."""
     for boll in bolls.copy():
         if boll.rect.y >= h_settings.screen_height:
             stats.boll_left -= 1
-
+            sb.prep_bolls()
+            sb.show_score()
             if stats.boll_left > 0:
                 del_bolls(bolls)
                 new_bolls(h_settings, screen, bolls)

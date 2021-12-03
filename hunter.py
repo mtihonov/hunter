@@ -32,7 +32,7 @@ def run_game():
     sb = Scoreboard(h_settings,screen, stats)
 
     while True:
-        hf.check_events(h_settings, screen, stats, area, play_button, quit_button)
+        hf.check_events(h_settings, screen, stats, sb, area, play_button, quit_button)
         hf.update_screen(h_settings, screen, sb, play_button, quit_button, bolls, area, stats)
         if stats.game_active:
             area.update()
