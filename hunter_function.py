@@ -1,6 +1,7 @@
 import pygame
 import sys
 from boll import Boll
+import json
 
 
 def update_screen(h_settings, screen, sb, play_button, quit_button, bolls, area, stats):
@@ -33,8 +34,7 @@ def update_screen(h_settings, screen, sb, play_button, quit_button, bolls, area,
 def check_collisions(h_settings, screen, stats, sb, bolls, area):
     """Проверка столкновения мяча и площадки."""
     if pygame.sprite.spritecollideany(area, bolls):
-        stats.score += stats.get_score
-        sb.prep_score()
+        checking_the_current_and_record_account(stats, sb)
         del_bolls(bolls)
         new_bolls(h_settings, screen, bolls)
 
@@ -125,3 +125,14 @@ def checking_the_exit_from_the_screen(h_settings, screen, bolls, stats, sb):
                 pygame.mouse.set_visible(True)
                 del_bolls(bolls)
                 new_bolls(h_settings, screen, bolls)
+
+def checking_the_current_and_record_account(stats, sb):
+    stats.score += stats.get_score
+    sb.prep_score()
+
+    if stats.score >= stats.high_score:
+        stats.high_score = stats.score
+        filename = 'high_score.json'
+        with open(filename, 'w') as f_obj:
+            json.dump(stats.score, f_obj)
+        sb.prep_high_score()
