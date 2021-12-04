@@ -16,6 +16,7 @@ def update_screen(h_settings, screen, sb, play_button, quit_button, bolls, area,
 
     checking_the_exit_from_the_screen(h_settings, screen, bolls, stats, sb)
 
+    sb.prep_score()
     sb.show_score()
 
     # Вывод кнопок на экран
@@ -97,8 +98,8 @@ def check_play_button(h_settings, screen, stats, sb, play_button, quit_button, m
         pygame.mouse.set_visible(False)
 
         stats.reset_stats()
-        stats.game_active = True
         sb.prep_bolls()
+        stats.game_active = True
 
     quit_button_clicked = quit_button.rect.collidepoint(mouse_x, mouse_y)
     if quit_button_clicked:
