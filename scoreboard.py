@@ -26,7 +26,7 @@ class Scoreboard():
 
     def prep_score(self):
         """Преобразует текущий счет в графическое изображение."""
-        rounded_score = int(round(self.stats.score, -1))
+        rounded_score = int(round(self.stats.score, 1))
         self.score_str = "{:,}".format(rounded_score)
         self.score_image = self.font.render('Поймано мячей - ' + self.score_str, True, self.text_color,
                                             self.h_settings.bg_color)
@@ -46,7 +46,7 @@ class Scoreboard():
 
     def prep_high_score(self):
         """Преобразует рекордный счет в графическое изображение."""
-        high_score = int(round(self.stats.high_score, -1))
+        high_score = int(round(self.stats.high_score, 1))
         self.high_score_str = "{:,}".format(high_score)
         self.high_score_image = self.font.render('Рекорд: ' + self.high_score_str, True, self.text_color,
                                                  self.h_settings.bg_color)

@@ -23,3 +23,4 @@ class GameStats():
         """Инициализирует статистику, изменяющуюся в ходе игры."""
         self.boll_left = self.boll_limit
         self.score = 0
+        self.get_score = 1

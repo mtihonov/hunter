@@ -16,8 +16,6 @@ def update_screen(h_settings, screen, sb, play_button, quit_button, bolls, area,
 
     checking_the_exit_from_the_screen(h_settings, screen, bolls, stats, sb)
 
-    check_collisions(h_settings, screen, bolls, area)
-
     sb.show_score()
 
     # Вывод кнопок на экран
@@ -25,17 +23,17 @@ def update_screen(h_settings, screen, sb, play_button, quit_button, bolls, area,
         if stats.boll_left <= 0:
             load_image_game_over(h_settings, screen)
             sb.show_score_game_over()
-        else:
-            sb.show_score()
 
         play_button.draw_button()
         quit_button.draw_button()
 
     pygame.display.flip()
 
-def check_collisions(h_settings, screen, bolls, area):
+def check_collisions(h_settings, screen, stats, sb, bolls, area):
     """Проверка столкновения мяча и площадки."""
     if pygame.sprite.spritecollideany(area, bolls):
+        stats.score += stats.get_score
+        sb.prep_score()
         del_bolls(bolls)
         new_bolls(h_settings, screen, bolls)
 
@@ -106,9 +104,10 @@ def check_play_button(h_settings, screen, stats, sb, play_button, quit_button, m
     if quit_button_clicked:
         sys.exit()
 
-def bolls_update(screen, bolls):
+def bolls_update(h_settings, screen, stats, sb, bolls, area):
     """Обновление позиции мяча."""
     bolls.update()
+    check_collisions(h_settings, screen, stats, sb, bolls, area)
 
 def checking_the_exit_from_the_screen(h_settings, screen, bolls, stats, sb):
     """Удаляет мяч и выводит картинку о конце игры."""
@@ -116,7 +115,7 @@ def checking_the_exit_from_the_screen(h_settings, screen, bolls, stats, sb):
         if boll.rect.y >= h_settings.screen_height:
             stats.boll_left -= 1
             sb.prep_bolls()
-            sb.show_score()
+
             if stats.boll_left > 0:
                 del_bolls(bolls)
                 new_bolls(h_settings, screen, bolls)

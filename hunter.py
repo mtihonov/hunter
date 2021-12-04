@@ -29,13 +29,13 @@ def run_game():
     stats = GameStats(h_settings)
 
     # Созжание экземпляра для хранения игрового счета.
-    sb = Scoreboard(h_settings,screen, stats)
+    sb = Scoreboard(h_settings, screen, stats)
 
     while True:
         hf.check_events(h_settings, screen, stats, sb, area, play_button, quit_button)
         hf.update_screen(h_settings, screen, sb, play_button, quit_button, bolls, area, stats)
         if stats.game_active:
             area.update()
-            hf.bolls_update(screen, bolls)
+            hf.bolls_update(h_settings, screen, stats, sb, bolls, area)
 
 run_game()
