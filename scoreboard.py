@@ -67,7 +67,7 @@ class Scoreboard():
 
     def game_over_prep_score(self):
         """Изменяет фон счета и выводит на экран после завершения количества попыток."""
-        self.game_over_score_image = self.font.render('Поймано мячей - ' + self.score_str, True, self.text_color,
+        self.game_over_score_image = self.font.render('Поймано мячей : ' + self.score_str, True, self.text_color,
                                             self.rect_color )
 
     def game_over_prep_high_score(self):

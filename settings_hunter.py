@@ -8,13 +8,13 @@ class Settings():
         self.bg_color = (255, 255, 255)
 
         # Скорость перемещения мяча.
-        self.speed_boll = 0.9
+        self.speed_boll = 0.8
 
         # Количество одновременнонаходящихся мячей в игре.
         self.quantity_boll = 1
 
         # атрибуты площадки
-        self.speed_area = 1.0
+        self.speed_area = 1.3
         self.area_width = 150
         self.area_height = 10
         self.area_color = 60, 60, 60

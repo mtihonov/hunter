@@ -17,12 +17,11 @@ class Area(Sprite):
         self.rect.bottom = h_settings.screen_height - 20
         self.screen_rect = screen.get_rect()
 
-        # Позиция пуди хранится в вещественном формате.
-        self.y = float(self.rect.bottom)
-
+        # Позиция площадки хранится в вещественном формате.
+        #self.y = float(self.rect.bottom)
+        self.x = float(self.rect.centerx)
         self.color = h_settings.area_color
         self.speed_factor = h_settings.speed_area
-
 
         # Флаг перемещения
         self.moving_right = False
@@ -36,8 +35,9 @@ class Area(Sprite):
         """Обновляет позицию корабля с учетом флагов."""
         # Обновляет атрибут center, не rect.
         if self.moving_right and self.rect.right < self.screen_rect.right:
-            self.rect.centerx += self.speed_factor
+            self.x += self.speed_factor
+            self.rect.centerx = self.x
         if self.moving_left and self.rect.left > 0:
-            self.rect.centerx -= self.speed_factor
-
+            self.x -= self.speed_factor
+            self.rect.centerx = self.x
 
